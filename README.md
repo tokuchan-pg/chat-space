@@ -12,6 +12,7 @@
 補足  
 - MUL：重複可能な外部制約キー（indexが貼られる）  
 - PRI：重複不可な外部制約キー（indexが貼られる）  
+- UNI：一意性制約（indexが貼られる）  
 - 自動生成されるカラムは省略  
 - deviseで生成するカラムは省略  
 
@@ -24,12 +25,12 @@
 
 ##### messagesテーブル
 
-|  Field   |     Type     | Null | Key | Default | Extra |
-|----------|--------------|------|-----|---------|-------|
-| body     | text         | YES  |     | NULL    |       |
-| image    | varcher(255) | YES  |     | NULL    |       |
-| group_id | int(11)      | NO   | MUL | NULL    |       |
-| user_id  | int(11)      | NO   | MUL | NULL    |       |
+|  Field   |     Type     | Null | Key | Default |          Extra           |
+|----------|--------------|------|-----|---------|--------------------------|
+| body     | text         | YES  |     | NULL    |                          |
+| image    | varcher(255) | YES  |     | NULL    |                          |
+| group_id | int(11)      | NO   | MUL | NULL    | type references on Rails |
+| user_id  | int(11)      | NO   | MUL | NULL    | type references on Rails |
 
 ##### groupsテーブル
 
@@ -40,7 +41,7 @@
 
 ##### joinsテーブル（中間テーブル）
 
-|  Field   |   Type  | Null | Key | Default | Extra |
-|----------|---------|------|-----|---------|-------|
-| group_id | int(11) | NO   | MUL | NULL    |       |
-| user_id  | int(11) | NO   | MUL | NULL    |       |
+|  Field   |   Type  | Null | Key | Default |          Extra           |
+|----------|---------|------|-----|---------|--------------------------|
+| group_id | int(11) | NO   | MUL | NULL    | type references on Rails |
+| user_id  | int(11) | NO   | MUL | NULL    | type references on Rails |
