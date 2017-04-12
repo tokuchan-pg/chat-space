@@ -15,7 +15,7 @@
   width: 100%;
   position: relative;
 
-  .chat-side__user-content{
+  &-content{
     height: 50px;
     width: 100%;
     line-height: 50px;
@@ -52,18 +52,18 @@
   background-color: #2f3e51;
   height: 85%;
 
-  .chat-side__groups-list{
+  &-list{
     height: 100%;
 
     .chat-side__group{
       padding: 20px;
       color: #fff;
 
-      .chat-side__group-name{
+      &-name{
         font-size: 15px;
       }
 
-      .chat-side__group-message{
+      &-message{
         font-size: 11px;
       }
 

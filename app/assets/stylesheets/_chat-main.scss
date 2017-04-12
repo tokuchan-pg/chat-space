@@ -12,18 +12,18 @@
   border: 1px solid #EEE;
   box-sizing: border-box;
 
-  .chat-main__header--group{
+  &--group{
     @include clearfix();
     margin: 0 40px;
 
-    .chat-main__header--group-name{
+    &-name{
       color: #333;
       font-size: 20px;
       margin: 35px 0 15px;
       float: left;
     }
 
-    .chat-main__header--group-edit-btn{
+    &-edit-btn{
       color: $point-color;
       font-size: 15px;
       padding: 7.5px 20px;
@@ -34,7 +34,7 @@
 
   }
 
-  .chat-main__header-members{
+  &-members{
     color: #999;
     font-size: 12px;
     margin: 0 40px;
@@ -47,27 +47,27 @@
 .chat-main__body{
   height: calc(100vh - 15% - 90px);
 
-  .chat-main__body--messages-list{
+  &--messages-list{
     padding: 26px 40px 0;
 
     .chat-main__body--message{
       padding: 20px 0;
 
-      .chat-main__body--message-name{
+      &-name{
         color: $message-color;
         font-size: 16px;
         font-weight: bold;
         float: left;
       }
 
-      .chat-main__body--message-time{
+      &-time{
         color: #999;
         font-size: 12px;
         padding-left: 10px;
         float: left;
       }
 
-      .chat-main__body--message-body{
+      &-body{
         color: $message-color;
         font-size: 14px;
         clear: both;
@@ -86,7 +86,7 @@
   background-color: #AAAAAA;
   height: 90px;
 
-  .chat-main__footer-form{
+  &-form{
     margin: 0 40px;
     position: relative;
 
