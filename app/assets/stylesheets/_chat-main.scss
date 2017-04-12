@@ -1,0 +1,134 @@
+//右カラム全体
+.chat-main{
+  height: 100vh;
+  width: calc(100vw - 300px);
+  float: left;
+}
+
+//右カラムヘッダー部
+
+.chat-main__header{
+  height: 15%;
+  border: 1px solid #EEE;
+  box-sizing: border-box;
+
+  &--group{
+    @include clearfix();
+    margin: 0 40px;
+
+    &-name{
+      color: #333;
+      font-size: 20px;
+      margin: 35px 0 15px;
+      float: left;
+    }
+
+    &-edit-btn{
+      color: $point-color;
+      font-size: 15px;
+      padding: 7.5px 20px;
+      margin: 28px 20px 0;
+      border: 1px solid $point-color;
+      float: right;
+    }
+
+  }
+
+  &-members{
+    color: #999;
+    font-size: 12px;
+    margin: 0 40px;
+  }
+
+}
+
+//右カラムボディ部
+
+.chat-main__body{
+  height: calc(100vh - 15% - 90px);
+
+  &--messages-list{
+    padding: 26px 40px 0;
+
+    .chat-main__body--message{
+      padding: 20px 0;
+
+      &-name{
+        color: $message-color;
+        font-size: 16px;
+        font-weight: bold;
+        float: left;
+      }
+
+      &-time{
+        color: #999;
+        font-size: 12px;
+        padding-left: 10px;
+        float: left;
+      }
+
+      &-body{
+        color: $message-color;
+        font-size: 14px;
+        clear: both;
+      }
+
+    }
+
+  }
+
+}
+
+
+//右カラムフッター部
+
+.chat-main__footer{
+  background-color: #AAAAAA;
+  height: 90px;
+
+  &-form{
+    margin: 0 40px;
+    position: relative;
+
+    .chat-main__footer-body{
+      position: relative;
+
+      .message{
+        height: 20px;
+        width: calc(100% - 135px);
+        padding: 15px 10px;
+        margin: 20px 0;
+        border: none;
+        color: $message-color;
+        font-size: 16px;
+      }
+
+      .chat-file{
+        position: absolute;
+        top: 35px;
+        right: 135px;
+
+        .image{
+          display: none;
+        }
+
+      }
+
+    }
+
+    .submit{
+      color: #FFF;
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      background-color: $point-color;
+      border: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 20px 0;
+    }
+
+  }
+
+}

@@ -1,0 +1,54 @@
+.notification
+  .notice
+    チャットグループが作成されました。
+
+.chat-side
+
+  .chat-side__user
+
+    .chat-side__user-content
+      .chat-side__user-name
+        login_username
+      .chat-side__user--edit-user
+        = link_to 'https://www.google.co.jp/' do
+          %i.fa.fa-cog
+      .chat-side__user--new-group
+        = link_to 'https://www.google.co.jp/' do
+          %i.fa.fa-pencil-square-o
+
+  .chat-side__groups
+    .chat-side__groups-list
+      = render 'group'
+      = render 'group'
+      = render 'group'
+
+.chat-main
+
+  .chat-main__header
+    .chat-main__header--group
+      .chat-main__header--group-name
+        groupname
+      = link_to 'Edit', 'https://www.google.co.jp/', :class => "chat-main__header--group-edit-btn"
+    .chat-main__header-members
+      MEMBER:
+      %i
+        user1
+      %i
+        user2
+      %i
+        user3
+
+  .chat-main__body
+    .chat-main__body--messages-list
+      = render 'message'
+      = render 'message'
+      = render 'message'
+
+  .chat-main__footer
+    %form.chat-main__footer-form
+      .chat-main__footer-body
+        %input.message{placeholder: "type a message"}
+        %label.chat-file
+          %input.image
+          %i.fa.fa-image
+      %input.submit{value: "Send"}

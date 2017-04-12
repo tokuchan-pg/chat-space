@@ -1,0 +1,74 @@
+//左カラム全体
+.chat-side{
+  height: 100vh;
+  width: 300px;
+  float: left;
+    a {
+    color: #FFF;
+  }
+}
+
+//左カラム上部
+.chat-side__user{
+  background-color: #253141;
+  height: 15%;
+  width: 100%;
+  position: relative;
+
+  &-content{
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+
+    .chat-side__user-name{
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      margin-left: 20px;
+      float: left;
+    }
+
+    .chat-side__user--edit-user {
+      margin-right: 20px;
+      float: right;
+    }
+
+    .chat-side__user--new-group {
+      margin-right: 5px;
+      float: right;
+    }
+
+  }
+
+}
+
+
+//左カラム下部
+.chat-side__groups{
+  background-color: #2f3e51;
+  height: 85%;
+
+  &-list{
+    height: 100%;
+
+    .chat-side__group{
+      padding: 20px;
+      color: #fff;
+
+      &-name{
+        font-size: 15px;
+      }
+
+      &-message{
+        font-size: 11px;
+      }
+
+    }
+
+  }
+
+}

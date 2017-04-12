@@ -48,3 +48,6 @@ end
 
 # Haml
 gem 'haml-rails'
+
+# font-awesome
+gem "font-awesome-rails"
