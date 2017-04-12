@@ -124,3 +124,9 @@ legend {
 }
 /* YUI CSS Detection Stamp */
 #yui3-css-stamp.cssreset { display: none; }
+
+/* delete underline of linktext */
+a {
+    text-decoration: none;
+}
+
