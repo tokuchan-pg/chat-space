@@ -8,9 +8,9 @@
 
     .chat-side__user-content
       .chat-side__user-name
-        login_username
+        = current_user.name
       .chat-side__user--edit-user
-        = link_to 'https://www.google.co.jp/' do
+        = link_to edit_user_registration_path do
           %i.fa.fa-cog
       .chat-side__user--new-group
         = link_to 'https://www.google.co.jp/' do
