@@ -10,7 +10,7 @@
     .notification
       .notice
         - if notice
-          %p.notice-succsess= notice
+          = content_tag(:p, notice, class: 'notice-succsess')
         - if alert
-          %p.notice-error= alert
+          = content_tag(:p, alert, class: 'notice-error')
     = yield
