@@ -44,6 +44,7 @@
   }
 
   .chat-group-form__field {
+    @include clearfix();
     margin-top: 30px;
 
     .chat-group-form__field--left {
@@ -57,6 +58,14 @@
     .chat-group-form__field--right {
       float: right;
       width: 70%;
+
+      .chat-group-form__search{
+        @include clearfix();
+      }
+
+        .chat-group-user{
+          @include clearfix();
+        }
     }
 
     .chat-group-form__label {
