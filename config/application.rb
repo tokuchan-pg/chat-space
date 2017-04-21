@@ -18,5 +18,9 @@ module ChatSpace
       g.test_framework false
     end
 
+    #devise.ja.ymlをconfig/localesに直接追加する下準備として、
+    #Railsアプリ自体のlocaleの設定を日本語に変更する
+    config.i18n.default_locale = :ja
+
   end
 end
