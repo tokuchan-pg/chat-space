@@ -24,9 +24,8 @@
         %label.chat-group-form__label{:for => "chat_group_チャットメンバー"} チャットメンバー
       .chat-group-form__field--right
         #chat-group-users
-          #chat-group-user-22.chat-group-user
-            %input{:name => "chat_group[user_ids][]", :type => "hidden", :value => "22"}/
-            %p.chat-group-user__name seo_kyohei
+          .chat-group-user
+            = collection_check_boxes(:group, :user_ids, User.all, :id, :name)
 
     .chat-group-form__field
       .chat-group-form__field--left
