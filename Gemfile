@@ -39,6 +39,8 @@ group :development, :test do
   gem 'byebug'
   #pry-railsは開発環境とテスト環境でしか使わないので、ここに記述する
   gem 'pry-rails'
+
+  gem 'erb2haml'
 end
 
 group :development do

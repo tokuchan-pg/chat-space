@@ -5,7 +5,8 @@
 @import "./config/variable";
 
 @import "./notification";
-@import "./chat-side";
-@import "./chat-main";
 
-@import "./user";
+// modulesディレクトリの全てのファイルをimportする
+@import "./modules/*";
+
+
