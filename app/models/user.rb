@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :joins
-  has_many :groups, through: :joins
+  has_many :group_users
+  has_many :groups, through: :group_users
 
   # allow users to update their accounts without passwords
   def update_without_current_password(params, *options)
