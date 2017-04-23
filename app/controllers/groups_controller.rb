@@ -5,8 +5,14 @@ class GroupsController < ApplicationController
   end
 
   def create
-    Group.create(group_params)
-    redirect_to root_path
+    @group = Group.new(group_params)
+    if @group.save
+      flash.notice = '新規グループが作成されました。'
+      redirect_to root_path
+    else
+      flash.alert = 'グループ名を入力して下さい'
+      render action: 'new'
+    end
   end
 
   private
