@@ -25,7 +25,8 @@
       .chat-group-form__field--right
         #chat-group-users
           .chat-group-user
-            = collection_check_boxes(:group, :user_ids, User.all, :id, :name)
+            / ログインユーザーのチェックボックスは表示させないようにする
+            = collection_check_boxes(:group, :user_ids, User.where.not(id: current_user.id), :id, :name)
 
     .chat-group-form__field
       .chat-group-form__field--left
