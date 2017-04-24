@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
       # renderと併用すると、ページを回遊してもメッセージが残ってしまう。
       # →flash.nowを使う
       flash.now.alert = 'グループ名を入力して下さい'
-      render action: 'new'
+      render :new
     end
   end
 
