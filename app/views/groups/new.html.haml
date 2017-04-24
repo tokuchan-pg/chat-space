@@ -1,8 +1,7 @@
 .chat-group-form
   %h1 新規チャットグループ
-  =form_for @group, html: {id: 'new_chat_group', class: 'new_chat_group'} do |f|
+  =form_for @group do |f|
 
-    / グループ名入力
     .chat-group-form__field
       .chat-group-form__field--left
         %label.chat-group-form__label{:for => "chat_group_name"} グループ名
