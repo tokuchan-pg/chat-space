@@ -5,7 +5,7 @@
 1. usersテーブル
 1. messagesテーブル
 1. groupsテーブル
-1. joinsテーブル（usersテーブルとgroupsテーブルの中間テーブル）
+1. group_usersテーブル（usersテーブルとgroupsテーブルの中間テーブル）
 
 ### 各テーブルのカラム構成
 
@@ -39,7 +39,7 @@
 | name  | varcher(255) | NO   |     | NULL    |       |
 
 
-##### joinsテーブル（中間テーブル）
+##### group_usersテーブル（中間テーブル）
 
 |  Field   |   Type  | Null | Key | Default |          Extra           |
 |----------|---------|------|-----|---------|--------------------------|
