@@ -10,9 +10,6 @@ class GroupsController < ApplicationController
       flash.notice = '新規グループが作成されました。'
       redirect_to root_path
     else
-      # flashは「アクション->リダイレクト->アクション」の処理が済まないとメッセージが削除されないので、
-      # renderと併用すると、ページを回遊してもメッセージが残ってしまう。
-      # →flash.nowを使う
       flash.now.alert = 'グループ名を入力して下さい'
       render :new
     end
