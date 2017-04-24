@@ -1,0 +1,33 @@
+.chat-group-form
+  %h1 新規チャットグループ
+  =form_for @group do |f|
+
+    .chat-group-form__field
+      .chat-group-form__field--left
+        %label.chat-group-form__label{:for => "chat_group_name"} グループ名
+      .chat-group-form__field--right
+        =f.text_field :name, placeholder: 'グループ名を入力してください'
+
+    / メンバー追加（インクリメンタルサーチ用）
+    / .chat-group-form__field
+    /   .chat-group-form__field--left
+    /     %label.chat-group-form__label{:for => "chat_group_チャットメンバーを追加"} チャットメンバーを追加
+    /   .chat-group-form__field--right
+    /     .chat-group-form__search
+    /       %input#user-search-field.chat-group-form__input{:placeholder => "追加したいユーザー名を入力してください", :type => "text"}/
+    /     #user-search-result
+
+    / メンバー追加（collection_check_boxe用）
+    .chat-group-form__field
+      .chat-group-form__field--left
+        %label.chat-group-form__label{:for => "chat_group_チャットメンバー"} チャットメンバー
+      .chat-group-form__field--right
+        #chat-group-users
+          .chat-group-user
+            / ログインユーザーのチェックボックスは表示させないようにする
+            = collection_check_boxes(:group, :user_ids, User.where.not(id: current_user.id), :id, :name)
+
+    .chat-group-form__field
+      .chat-group-form__field--left
+      .chat-group-form__field--right
+        = f.submit 'Save', class: 'chat-group-form__action-btn'
