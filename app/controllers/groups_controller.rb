@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
 
+  before_action :set_group, only: [:edit, :update]
+
   def new
     @group = Group.new
   end
@@ -15,11 +17,9 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @group = Group.find(params[:id])
   end
 
   def update
-    @group = Group.find(params[:id])
     if @group.update(group_params)
       redirect_to root_path, notice: 'グループが更新されました'
     else
@@ -34,6 +34,10 @@ class GroupsController < ApplicationController
     params[:group][:user_ids].push(current_user.id.to_s)
     # :user_idsは配列なので、書き方が↓のように特殊な形となる
     params.require(:group).permit(:name, user_ids: [])
+  end
+
+  def set_group
+    @group = Group.find(params[:id])
   end
 
 end
