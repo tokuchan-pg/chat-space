@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
 
+  before_action :set_group, only: [:edit, :update]
+
   def new
     @group = Group.new
   end
@@ -7,11 +9,22 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      flash.notice = '新規グループが作成されました。'
-      redirect_to root_path
+      redirect_to root_path, notice: '新規グループが作成されました。'
     else
       flash.now.alert = 'グループ名を入力して下さい'
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @group.update(group_params)
+      redirect_to root_path, notice: 'グループが更新されました'
+    else
+      flash.now.alert = 'グループ名を入力して下さい'
+      render :edit
     end
   end
 
@@ -21,6 +34,10 @@ class GroupsController < ApplicationController
     params[:group][:user_ids].push(current_user.id.to_s)
     # :user_idsは配列なので、書き方が↓のように特殊な形となる
     params.require(:group).permit(:name, user_ids: [])
+  end
+
+  def set_group
+    @group = Group.find(params[:id])
   end
 
 end
