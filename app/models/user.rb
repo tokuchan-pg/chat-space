@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :group_users
   has_many :groups, through: :group_users
 
+  has_many :messages
+
   # allow users to update their accounts without passwords
   def update_without_current_password(params, *options)
     params.delete(:current_password)
