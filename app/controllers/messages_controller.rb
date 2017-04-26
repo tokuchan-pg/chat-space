@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
   end
 
   def set_messages
-    @messages = Message.where(group_id: params[:group_id])
+    @messages = @group.messages.includes(:user)
   end
 
 end
