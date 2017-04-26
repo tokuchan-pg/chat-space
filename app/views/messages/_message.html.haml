@@ -1,7 +1,7 @@
 .chat-main__body--message
   .chat-main__body--message-name
-    username
+    #{message.user.name}
   .chat-main__body--message-time
-    2017/04/08 12:29:33
+    #{message.created_at}
   .chat-main__body--message-body
-    hoge
+    #{message.body}

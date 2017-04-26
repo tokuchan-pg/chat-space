@@ -1,30 +1,13 @@
-.chat-side
+= render 'shared/chat-side'
 
-  .chat-side__user
-
-    .chat-side__user-content
-      .chat-side__user-name
-        = current_user.name
-      .chat-side__user--edit-user
-        = link_to edit_user_registration_path do
-          %i.fa.fa-cog
-      .chat-side__user--new-group
-        = link_to new_group_path do
-          %i.fa.fa-pencil-square-o
-
-  .chat-side__groups
-    .chat-side__groups-list
-      = render 'group'
-      = render 'group'
-      = render 'group'
 
 .chat-main
 
   .chat-main__header
     .chat-main__header--group
       .chat-main__header--group-name
-        groupname
-      = link_to 'Edit', 'https://www.google.co.jp/', :class => "chat-main__header--group-edit-btn"
+        = @group.name
+      = link_to 'Edit', edit_group_path(@group), class: "chat-main__header--group-edit-btn"
     .chat-main__header-members
       MEMBER:
       %i
@@ -36,15 +19,14 @@
 
   .chat-main__body
     .chat-main__body--messages-list
-      = render 'message'
-      = render 'message'
-      = render 'message'
+      - @messages.each do |message|
+        = render partial: 'message', locals: {message: message}
 
   .chat-main__footer
-    %form.chat-main__footer-form
+    =form_for [@group, @message] do |f|
       .chat-main__footer-body
-        %input.message{placeholder: "type a message"}
+        =f.text_field :body, placeholder: 'type a message'
         %label.chat-file
           %input.image
           %i.fa.fa-image
-      %input.submit{value: "Send"}
+      = f.submit 'Send', class: 'submit'
