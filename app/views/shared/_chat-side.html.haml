@@ -1,0 +1,18 @@
+.chat-side
+
+  .chat-side__user
+
+    .chat-side__user-content
+      .chat-side__user-name
+        = current_user.name
+      .chat-side__user--edit-user
+        = link_to edit_user_registration_path do
+          %i.fa.fa-cog
+      .chat-side__user--new-group
+        = link_to new_group_path do
+          %i.fa.fa-pencil-square-o
+
+  .chat-side__groups
+    .chat-side__groups-list
+      - current_user.groups.each do |group|
+        = render partial: 'shared/group', locals: {group: group}

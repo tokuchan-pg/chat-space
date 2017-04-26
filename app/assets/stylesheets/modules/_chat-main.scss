@@ -86,14 +86,14 @@
   background-color: #AAAAAA;
   height: 90px;
 
-  &-form{
+  .new_message{
     margin: 0 40px;
     position: relative;
 
     .chat-main__footer-body{
       position: relative;
 
-      .message{
+      #message_body{
         height: 20px;
         width: calc(100% - 135px);
         padding: 15px 10px;
