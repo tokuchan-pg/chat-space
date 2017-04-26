@@ -43,6 +43,7 @@ group :development, :test do
   gem 'erb2haml'
 
   gem 'rspec-rails'
+  gem 'factory_girl_rails', "~> 4.4.1"
 end
 
 group :development do
