@@ -41,6 +41,13 @@ group :development, :test do
   gem 'pry-rails'
 
   gem 'erb2haml'
+
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', "~> 4.4.1"
+end
+
+group :test do
+  gem 'faker'
 end
 
 group :development do
