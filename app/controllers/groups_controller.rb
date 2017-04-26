@@ -2,6 +2,9 @@ class GroupsController < ApplicationController
 
   before_action :set_group, only: [:edit, :update]
 
+  def index
+  end
+
   def new
     @group = Group.new
   end
@@ -9,7 +12,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      redirect_to root_path, notice: '新規グループが作成されました。'
+      redirect_to group_messages_path(@group), notice: '新規グループが作成されました。'
     else
       flash.now.alert = 'グループ名を入力して下さい'
       render :new
@@ -21,7 +24,7 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to root_path, notice: 'グループが更新されました'
+      redirect_to group_messages_path(@group), notice: 'グループが更新されました'
     else
       flash.now.alert = 'グループ名を入力して下さい'
       render :edit
