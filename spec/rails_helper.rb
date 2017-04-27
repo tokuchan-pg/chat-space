@@ -1,3 +1,7 @@
+#ControllerMacrosでログイン状態を作ってテストを行う
+require 'devise'
+require 'support/controller_macros'
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -30,6 +34,12 @@ RSpec.configure do |config|
 
   #factory_girlによってインスタンスを作成する際、レシーバーの記述を省略する
   config.include FactoryGirl::Syntax::Methods
+
+  # deviseのテストヘルパーをロードする
+  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, :type => :view
+  # 作成したログインモジュールを追加する
+  config.include ControllerMacros, type: :controller
 
   # integrates with gem 'rails-controller-testing' to uses 'assings' in controller testing
   [:controller, :view, :request].each do |type|
