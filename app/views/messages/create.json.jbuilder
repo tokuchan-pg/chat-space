@@ -1,4 +1,4 @@
 json.name @message.user.name
 # Railsのデフォルトの時刻表示形式に合わせる
-json.created_at @message.created_at.strftime("%Y-%m-%d %H:%M:%S UTC")
+json.created_at l(@message.created_at, format: :custom)
 json.body @message.body

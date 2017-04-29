@@ -1,7 +1,7 @@
 .chat-main__body--message
   .chat-main__body--message-name
-    #{message.user.name}
+    = message.user.name
   .chat-main__body--message-time
-    #{message.created_at}
+    = l(message.created_at, format: :custom)
   .chat-main__body--message-body
-    #{message.body}
+    = message.body
