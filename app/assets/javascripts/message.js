@@ -23,7 +23,7 @@ $(document).on("turbolinks:load", function() {
 
     $.ajax({
       type: 'POST',
-      url: './messages.json',
+      url: $(this).attr('action'),
       data: {
         message: {
           body: message,
