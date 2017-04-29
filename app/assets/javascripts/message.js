@@ -1,15 +1,14 @@
 $(document).on("turbolinks:load", function() {
 
-  console.log('message.js');
-
   function buildHTML(message) {
-    var html_name =
-    $('<div class = "chat-main__body--message-name">').append(message.name);
-    var html_time =
-    $('<div class = "chat-main__body--message-time">').append(message.created_at);
-    var html_body =
-    $('<div class = "chat-main__body--message-body">').append(message.body);
-    var html =
+    var
+      html_name =
+    $('<div class = "chat-main__body--message-name">').append(message.name),
+      html_time =
+    $('<div class = "chat-main__body--message-time">').append(message.created_at),
+      html_body =
+    $('<div class = "chat-main__body--message-body">').append(message.body),
+      html =
     $('<div class = "chat-main__body--message">').append([html_name, html_time, html_body]);
     return html;
   }
