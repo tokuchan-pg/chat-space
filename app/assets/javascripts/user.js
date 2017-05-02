@@ -50,10 +50,10 @@ $(document).on("turbolinks:load", function() {
       })
 
       .done(function(data) {
-        for (var i = 0; i < data.length; i++){
-          var html = buildAddUserHTML(data[i]);
+        data.forEach(function(user){
+          var html = buildAddUserHTML(user);
           $('#user-search-result').append(html);
-        }
+        });
       })
 
       .fail(function() {
