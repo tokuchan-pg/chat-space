@@ -1,0 +1,6 @@
+.chat-group-user
+  %input{type: "hidden", value: user.id, name: 'group[user_ids][]'}
+  %p.chat-group-user__name
+    = user.name
+  %p.chat-group-user__btn.chat-group-user__btn--remove
+    削除
