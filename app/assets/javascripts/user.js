@@ -1,21 +1,31 @@
 $(document).on("turbolinks:load", function() {
 
   // 検索したユーザーのHTMLを組み立て
-  function buildHTML(user) {
-    var
-      html_name = '<p class="chat-group-user__name">' + user.name + '</p>',
-      html_btn = '<p class="chat-group-user__btn chat-group-user__btn--add" data-id = ' + user.id + '>' + '追加' + '</p>',
-      html = $('<div class="chat-group-user">').append([html_name, html_btn]);
+  function buildAddUserHTML(user) {
+    var html =
+      '<div class="chat-group-user">' +
+      '<p class="chat-group-user__name">' +
+      user.name +
+      '</p>' +
+      '<p class="chat-group-user__btn chat-group-user__btn--add" data-id = ' + user.id + '>' +
+      '追加' +
+      '</p>' +
+      '</div>';
     return html;
   }
 
   // 追加するユーザーのHTMLを組み立て
-  function buildHTMLMember(user, id) {
-    var
-      html_input = '<input type = "hidden", value = ' + id + ', name = "group[user_ids][]", id ="group_user_ids_' + id + '">',
-      html_name = '<p class="chat-group-user__name">' + user + '</p>',
-      html_btn = '<p class="chat-group-user__btn chat-group-user__btn--remove">' + '削除' + '</p>',
-      html = $('<div class="chat-group-user">').append([html_input, html_name, html_btn]);
+  function buildMemberHTML(user, id) {
+    var html =
+      '<div class="chat-group-user">' +
+      '<input type = "hidden", value = ' + id + ', name = "group[user_ids][]", id ="group_user_ids_' + id + '">' +
+      '<p class="chat-group-user__name">' +
+      user +
+      '</p>' +
+      '<p class="chat-group-user__btn chat-group-user__btn--remove">' +
+      '削除' +
+      '</p>' +
+      '</div>';
     return html;
   }
 
@@ -46,7 +56,7 @@ $(document).on("turbolinks:load", function() {
 
       .done(function(data) {
         for (var i = 0; i < data.length; i++){
-          var html = buildHTML(data[i]);
+          var html = buildAddUserHTML(data[i]);
           $('#user-search-result').append(html);
         }
 
@@ -54,7 +64,7 @@ $(document).on("turbolinks:load", function() {
           var user = $(this).prev().text();
           // buildHTML内で付与したデータ属性からユーザーのidを取得する
           var id = $(this).data('id');
-          var html = buildHTMLMember(user, id);
+          var html = buildMemberHTML(user, id);
           $('#chat-group-users').append(html);
           $(this).parent().remove();
 
