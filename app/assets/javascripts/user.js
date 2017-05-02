@@ -29,13 +29,8 @@ $(document).on("turbolinks:load", function() {
     return html;
   }
 
-  // グループ編集ページ（groups#edit）にて、
-  // 初期状態で表示されているメンバーの削除ボタンを機能させる
-  $(".chat-group-user__btn--remove").on("click", function() {
-    $(this).parent().remove();
-  });
-
-  $("#user_search_field").on("keyup", function() {
+  // ユーザー検索機能本体(インクリメンタルサーチ)
+  function searchUsers() {
     $("#user-search-result").children().remove();
     var textField = $("#user_search_field");
     var user = textField.val();
@@ -59,21 +54,6 @@ $(document).on("turbolinks:load", function() {
           var html = buildAddUserHTML(data[i]);
           $('#user-search-result').append(html);
         }
-
-        $(".chat-group-user__btn--add").on("click", function() {
-          var user = $(this).prev().text();
-          // buildHTML内で付与したデータ属性からユーザーのidを取得する
-          var id = $(this).data('id');
-          var html = buildMemberHTML(user, id);
-          $('#chat-group-users').append(html);
-          $(this).parent().remove();
-
-            $(".chat-group-user__btn--remove").on("click", function() {
-              $(this).parent().remove();
-            });
-
-        });
-
       })
 
       .fail(function() {
@@ -81,9 +61,29 @@ $(document).on("turbolinks:load", function() {
       });
       // Turbolinksを止めないためにfalseを返しておく
       return false;
-
     }
+  }
 
+  // ユーザー検索(インクリメンタルサーチ)の発火イベントの指定
+  $("#user_search_field").on("keyup", searchUsers);
+
+  // ユーザーを追加
+  // Ajaxで動的に継ぎ足した要素を直接セレクタに指定することは出来ないので、
+  // Ajaxが動く前から存在している要素を調査範囲に指定する
+  $("#user-search-result").on("click", ".chat-group-user__btn--add", function() {
+    var user = $(this).prev().text();
+    // buildHTML内で付与したデータ属性からユーザーのidを取得する
+    var id = $(this).data('id');
+    var html = buildMemberHTML(user, id);
+    $('#chat-group-users').append(html);
+    $(this).parent().remove();
   });
+
+  // ユーザーを削除
+  $("#chat-group-users").on("click", ".chat-group-user__btn--remove", function(){
+    $(this).parent().remove();
+  });
+
+
 
 });
