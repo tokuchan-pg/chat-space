@@ -37,10 +37,9 @@ $(document).on("turbolinks:load", function() {
     $('.notice-succsess').remove();
     $('.notice-error').remove();
     e.preventDefault();
-    var textField = $('#message_body');
-    var fileField = $('#message_image');
-
-    var formData = new FormData($(this).get()[0]);
+    var textField = $('#message_body'),
+        fileField = $('#message_image'),
+        formData = new FormData($(this).get()[0]);
 
     $.ajax({
       type: 'POST',
