@@ -12,8 +12,7 @@
 !/log/.keep
 /tmp
 
-public/uploads/message/image/10/20170503154947.jpg
 
-*.jpg
-
-*.png
+#carrierwaveでアップロードした画像の変更履歴を無視する
+/public/uploads/message/image/*
+/public/uploads/tmp/*
