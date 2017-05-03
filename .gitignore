@@ -11,3 +11,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+public/uploads/message/image/10/20170503154947.jpg
+
+*.jpg
+
+*.png
