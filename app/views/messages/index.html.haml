@@ -27,6 +27,6 @@
       .chat-main__footer-body
         =f.text_field :body, placeholder: 'type a message'
         %label.chat-file
-          %input.image
+          = f.file_field :image
           %i.fa.fa-image
       = f.submit 'Send', class: 'submit'

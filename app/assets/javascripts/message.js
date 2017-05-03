@@ -1,35 +1,54 @@
 $(document).on("turbolinks:load", function() {
 
   function buildHTML(message) {
-    var
-      html_name =
-    $('<div class = "chat-main__body--message-name">').append(message.name),
-      html_time =
-    $('<div class = "chat-main__body--message-time">').append(message.created_at),
-      html_body =
-    $('<div class = "chat-main__body--message-body">').append(message.body),
-      html =
-    $('<div class = "chat-main__body--message">').append([html_name, html_time, html_body]);
+    // 画像がアップされないときは<img src = "null">となり余計なサムネが表示されることを防ぐ
+    if (message.image_url) {
+      var imageEle = '<img src = "' + message.image_url + '">';
+    } else {
+      var imageEle = '';
+    }
+
+    var html =
+      '<div class = "chat-main__body--message">' +
+      '<div class = "chat-main__body--message-name">' +
+      message.name +
+      '</div>' +
+      '<div class = "chat-main__body--message-time">' +
+      message.created_at +
+      '</div>' +
+      '<div class = "chat-main__body--message-body">' +
+      message.body +
+      '</div>' +
+      '<div class = "chat-main__body--message-image">' +
+      imageEle +
+      '</div>' +
+      '</div>';
     return html;
   }
 
+  // ファイル選択時にフォームを自動で送信する
+  $('#message_image').on('change', function(){
+    $(this).parents('#new_message').submit();
+  });
+
+  // フォームの非同期通信
   $('#new_message').on('submit', function(e) {
     // javascriptで作成したフラッシュメッセージを削除
     $('.notice-succsess').remove();
     $('.notice-error').remove();
     e.preventDefault();
     var textField = $('#message_body');
-    var message = textField.val();
+    var fileField = $('#message_image');
+
+    var formData = new FormData($(this).get()[0]);
 
     $.ajax({
       type: 'POST',
       url: $(this).attr('action'),
-      data: {
-        message: {
-          body: message,
-          image: 'image'
-        }
-      },
+      data: formData,
+      // Ajaxがdataを整形しない指定
+      processData: false,
+      contentType: false,
       dataType: 'json'
     })
 
@@ -40,6 +59,7 @@ $(document).on("turbolinks:load", function() {
       var notice = $('<p class = "notice-succsess">').append('新規メッセージが送信されました');
       $('.notice').append(notice);
       textField.val('');
+      fileField.val('');
     })
 
     .fail(function() {
