@@ -66,3 +66,7 @@ gem 'haml-rails'
 gem "font-awesome-rails"
 
 gem 'devise'
+
+# Image Uploader
+gem 'carrierwave'
+gem 'rmagick'
