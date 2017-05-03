@@ -5,3 +5,6 @@
     = l(message.created_at, format: :custom)
   .chat-main__body--message-body
     = message.body
+  .chat-main__body--message-image
+    - if message.image?
+      = image_tag message.image.to_s

@@ -11,3 +11,8 @@
 /log/*
 !/log/.keep
 /tmp
+
+
+#carrierwaveでアップロードした画像の変更履歴を無視する
+/public/uploads/message/image/*
+/public/uploads/tmp/*
