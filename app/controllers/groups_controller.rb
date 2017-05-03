@@ -6,6 +6,9 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
+    # 部分テンプレート「_group_form.html.haml」内で使用するダミー変数
+    # groups#newがリクエストされた際は、空の配列を渡すことでエラーを防ぐ
+    @users = []
   end
 
   def create
@@ -19,6 +22,9 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    # 部分テンプレート「_group_form.html.haml」内で使用する変数
+    # groups#newがリクエストされた際に渡すことで、グループ編集画面にて、既に参加しているメンバーを始めから表示させる
+    @users = @group.users.where.not(id: current_user.id)
   end
 
   def update
@@ -32,9 +38,6 @@ class GroupsController < ApplicationController
 
   private
   def group_params
-    # ログインユーザーのidを、collection_check_boxes経由で送られてきた配列user_idsに、文字列型で追加する
-    params[:group][:user_ids].push(current_user.id.to_s)
-    # :user_idsは配列なので、書き方が↓のように特殊な形となる
     params.require(:group).permit(:name, user_ids: [])
   end
 

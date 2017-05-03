@@ -8,5 +8,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :create]
   end
 
+  resources :users, only: [:index]
+
   root 'groups#index'
 end
