@@ -27,11 +27,9 @@
           .chat-group-user
             %input{type: "hidden", value: current_user.id, name: "group[user_ids][]"}
             = content_tag(:p, current_user.name)
-
-          / groups#editがリクエストされた時に、グループに既に参加しているメンバーを表示させるための部分テンプレートを呼び出し
+          / groups#editがリクエストされた時に、グループに既に参加しているメンバーを表示させるための部分テンプレートの呼び出し
           / groups#newがリクエストされた場合は、@usersには空の配列がセットされるので、実際のビューには何も表示されない
-          - @users.each do |user|
-            = render partial: 'group_form_user', locals: {user: user}
+          = render partial: 'group_form_user', collection: @users, as: :user
 
     .chat-group-form__field
       .chat-group-form__field--left
