@@ -16,3 +16,6 @@
 #carrierwaveでアップロードした画像の変更履歴を無視する
 /public/uploads/message/image/*
 /public/uploads/tmp/*
+
+#環境変数の設定ファイル
+.env

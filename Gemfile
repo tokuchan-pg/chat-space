@@ -70,3 +70,9 @@ gem 'devise'
 # Image Uploader
 gem 'carrierwave'
 gem 'rmagick'
+
+# upload images to S3
+gem 'fog'
+
+# use env variables
+gem 'dotenv-rails'
