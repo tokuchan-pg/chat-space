@@ -1,6 +1,7 @@
 $(document).on("turbolinks:load", function() {
 
   function buildHTML(message) {
+
     // 画像がアップされないときは<img src = "null">となり余計なサムネが表示されることを防ぐ
     if (message.image_url) {
       var imageEle = '<img src = "' + message.image_url + '">';
@@ -9,7 +10,9 @@ $(document).on("turbolinks:load", function() {
     }
 
     var html =
-      '<div class = "chat-main__body--message">' +
+      '<div class = "chat-main__body--message" data-message-id = ' +
+      message.id +
+      '>' +
       '<div class = "chat-main__body--message-name">' +
       message.name +
       '</div>' +
@@ -68,4 +71,38 @@ $(document).on("turbolinks:load", function() {
     // Turbolinksを止めないためにfalseを返しておく
     return false;
   });
+
+  // 10秒間隔で、インターバル中に投稿されたメッセージを非同期で取得し表示する
+  setInterval(function(){
+
+    // 特定のグループの最後に投稿されたメッセージのidを取得する
+    // まだメッセージが投稿されていない場合は、0を代入する
+    // ||の左側の要素があればそれを代入、なければ右側の値を代入
+    var lastMessageID = $('.chat-main__body--message').last().data('message-id') || 0;
+
+    // APIに最後のメッセージのidを送り、そのidより大きいメッセージがあれば返してもらう
+    $.ajax({
+      type: 'GET',
+      url: './messages',
+      data: {
+        lastMessageID: lastMessageID
+      },
+      dataType: 'json'
+    })
+
+    .done(function(data) {
+      data.forEach(function(message_add){
+        var html = buildHTML(message_add);
+        $('.chat-main__body--messages-list').append(html);
+      });
+    })
+
+    .fail(function() {
+      alert('エラーが生じました');
+    });
+    // Turbolinksを止めないためにfalseを返しておく
+    return false;
+    },
+    10000);
+
 });
