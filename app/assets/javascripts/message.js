@@ -91,10 +91,13 @@ $(document).on("turbolinks:load", function() {
     })
 
     .done(function(data) {
-      data.forEach(function(message_add){
-        var html = buildHTML(message_add);
-        $('.chat-main__body--messages-list').append(html);
-      });
+      // 配列dataの要素数が1以上のときのみHTMLを組成する
+      if (data.length){
+        data.forEach(function(message_add){
+          var html = buildHTML(message_add);
+          $('.chat-main__body--messages-list').append(html);
+        });
+      }
     })
 
     .fail(function() {
