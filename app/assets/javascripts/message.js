@@ -80,40 +80,49 @@ $(document).on("turbolinks:load", function() {
   });
 
   // 10秒間隔で、インターバル中に投稿されたメッセージを非同期で取得し表示する
-  setInterval(function(){
+  // 別ページに遷移した際にclearIntervalでsetIntervalを止める必要があるため、setIntervalを変数化する
+  var autoReload = setInterval(function(){
 
-    // 特定のグループの最後に投稿されたメッセージのidを取得する
-    // まだメッセージが投稿されていない場合は、0を代入する
-    // ||の左側の要素があればそれを代入、なければ右側の値を代入
-    var lastMessageID = $('.chat-main__body--message').last().data('message-id') || 0;
+    // URLがmessages#indexのパスと等しいときにのみ、Ajaxを起動する
+    if(location.pathname.match(/\/groups\/\d+\/messages/)){
 
-    // APIに最後のメッセージのidを送り、そのidより大きいメッセージがあれば返してもらう
-    $.ajax({
-      type: 'GET',
-      url: './messages',
-      data: {
-        lastMessageID: lastMessageID
-      },
-      dataType: 'json'
-    })
+      // 特定のグループの最後に投稿されたメッセージのidを取得する
+      // まだメッセージが投稿されていない場合は、0を代入する
+      // ||の左側の要素があればそれを代入、なければ右側の値を代入
+      var lastMessageID = $('.chat-main__body--message').last().data('message-id') || 0;
 
-    .done(function(data) {
-      // 配列dataの要素数が1以上のときのみHTMLを組成する
-      if (data.length){
-        data.forEach(function(message_add){
-          var html = buildHTML(message_add);
-          $('.chat-main__body--messages-list').append(html);
-        });
-        autoScrollToBottom();
-      }
-    })
+      // APIに最後のメッセージのidを送り、そのidより大きいメッセージがあれば返してもらう
+      $.ajax({
+        type: 'GET',
+        url: './messages',
+        data: {
+          lastMessageID: lastMessageID
+        },
+        dataType: 'json'
+      })
 
-    .fail(function() {
-      alert('エラーが生じました');
-    });
-    // Turbolinksを止めないためにfalseを返しておく
-    return false;
-    },
-    10000);
+      .done(function(data) {
+        // 配列dataの要素数が1以上のときのみHTMLを組成する
+        if (data.length){
+          data.forEach(function(message_add){
+            var html = buildHTML(message_add);
+            $('.chat-main__body--messages-list').append(html);
+          });
+          autoScrollToBottom();
+        }
+      })
+
+      .fail(function() {
+        alert('エラーが生じました');
+      });
+      // Turbolinksを止めないためにfalseを返しておく
+      return false;
+
+    } else {
+    // 別ページに遷移したらsetIntervalを停止させる
+    clearInterval(autoReload);
+    }
+
+  }, 10000);
 
 });
