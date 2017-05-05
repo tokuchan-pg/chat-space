@@ -29,6 +29,12 @@ $(document).on("turbolinks:load", function() {
     return html;
   }
 
+  // 最新のメッセージが表示されるように自動でスクロールする
+  function autoScrollToBottom(){
+    var targetY = $('.chat-main__body--messages-list').height();
+    $('.chat-main__body').scrollTop(targetY);
+  }
+
   // ファイル選択時にフォームを自動で送信する
   $('#message_image').on('change', function(){
     $(this).parents('#new_message').submit();
@@ -57,6 +63,7 @@ $(document).on("turbolinks:load", function() {
     .done(function(data) {
       var html = buildHTML(data);
       $('.chat-main__body--messages-list').append(html);
+      autoScrollToBottom();
       // javascriptでフラッシュメッセージを作成
       var notice = $('<p class = "notice-succsess">').append('新規メッセージが送信されました');
       $('.notice').append(notice);
@@ -97,6 +104,7 @@ $(document).on("turbolinks:load", function() {
           var html = buildHTML(message_add);
           $('.chat-main__body--messages-list').append(html);
         });
+        autoScrollToBottom();
       }
     })
 
