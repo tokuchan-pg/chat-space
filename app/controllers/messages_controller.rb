@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
       format.json do
         # @messages_addはHTMLリクエストに対しては生成不要なので、format.json内に入れ子にして定義
         # idが、ajaxで送られてきた最後のメッセージのidよりも大きいメッセージを取得
-        @messages_add = Message.where(group_id: params[:group_id]).where('id > ?', params[:lastMessageID])
+        @messages_add = @group.messages.where('id > ?', params[:lastMessageID])
       end
     end
   end
