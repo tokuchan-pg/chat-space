@@ -23,7 +23,6 @@ class MessagesController < ApplicationController
       end
     else
       flash.now.alert = 'メッセージを入力して下さい'
-      render :index
     end
   end
 
