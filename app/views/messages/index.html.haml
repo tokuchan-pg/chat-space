@@ -10,12 +10,9 @@
       = link_to 'Edit', edit_group_path(@group), class: "chat-main__header--group-edit-btn"
     .chat-main__header-members
       MEMBER:
-      %i
-        user1
-      %i
-        user2
-      %i
-        user3
+      - @group.users.each do |user|
+        %i
+          = user.name
 
   .chat-main__body
     .chat-main__body--messages-list
