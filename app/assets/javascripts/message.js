@@ -35,6 +35,42 @@ $(document).on("turbolinks:load", function() {
     $('.chat-main__body').scrollTop(targetY);
   }
 
+  // 自動更新のためのAjaxをメソッド化
+  function getLatestMessages(){
+    // 特定のグループの最後に投稿されたメッセージのidを取得する
+    // まだメッセージが投稿されていない場合は、0を代入する
+    // ||の左側の要素があればそれを代入、なければ右側の値を代入
+    var lastMessageID = $('.chat-main__body--message').last().data('message-id') || 0;
+    // APIに最後のメッセージのidを送り、そのidより大きいメッセージがあれば返してもらう
+    $.ajax({
+      type: 'GET',
+      url: './messages',
+      data: {
+        lastMessageID: lastMessageID
+      },
+      dataType: 'json'
+    })
+
+    .done(function(data) {
+      // 配列dataの要素数が1以上のときのみHTMLを組成する
+      if (data.length){
+        data.forEach(function(message_add){
+          var html = buildHTML(message_add);
+          $('.chat-main__body--messages-list').append(html);
+        });
+        autoScrollToBottom();
+      }
+    })
+
+    .fail(function() {
+      alert('エラーが生じました');
+    });
+    // Turbolinksを止めないためにfalseを返しておく
+    return false;
+  }
+
+
+
   // ファイル選択時にフォームを自動で送信する
   $('#message_image').on('change', function(){
     $(this).parents('#new_message').submit();
@@ -85,42 +121,11 @@ $(document).on("turbolinks:load", function() {
 
     // URLがmessages#indexのパスと等しいときにのみ、Ajaxを起動する
     if(location.pathname.match(/\/groups\/\d+\/messages/)){
-
-      // 特定のグループの最後に投稿されたメッセージのidを取得する
-      // まだメッセージが投稿されていない場合は、0を代入する
-      // ||の左側の要素があればそれを代入、なければ右側の値を代入
-      var lastMessageID = $('.chat-main__body--message').last().data('message-id') || 0;
-
-      // APIに最後のメッセージのidを送り、そのidより大きいメッセージがあれば返してもらう
-      $.ajax({
-        type: 'GET',
-        url: './messages',
-        data: {
-          lastMessageID: lastMessageID
-        },
-        dataType: 'json'
-      })
-
-      .done(function(data) {
-        // 配列dataの要素数が1以上のときのみHTMLを組成する
-        if (data.length){
-          data.forEach(function(message_add){
-            var html = buildHTML(message_add);
-            $('.chat-main__body--messages-list').append(html);
-          });
-          autoScrollToBottom();
-        }
-      })
-
-      .fail(function() {
-        alert('エラーが生じました');
-      });
-      // Turbolinksを止めないためにfalseを返しておく
-      return false;
+      getLatestMessages();
 
     } else {
     // 別ページに遷移したらsetIntervalを停止させる
-    clearInterval(autoReload);
+      clearInterval(autoReload);
     }
 
   }, 10000);
