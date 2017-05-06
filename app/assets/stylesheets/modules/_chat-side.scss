@@ -54,6 +54,7 @@
 
   &-list{
     height: 100%;
+    overflow-y: scroll;
 
     .chat-side__group{
       padding: 20px;

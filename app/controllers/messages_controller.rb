@@ -4,6 +4,14 @@ class MessagesController < ApplicationController
 
   def index
     @message = Message.new
+    respond_to do |format|
+      format.html
+      format.json do
+        # @messages_addはHTMLリクエストに対しては生成不要なので、format.json内に入れ子にして定義
+        # idが、ajaxで送られてきた最後のメッセージのidよりも大きいメッセージを取得
+        @messages_add = @group.messages.where('id > ?', params[:lastMessageID])
+      end
+    end
   end
 
   def create
