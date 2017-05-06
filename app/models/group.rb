@@ -8,7 +8,7 @@ class Group < ApplicationRecord
   has_many :messages
 
   def show_lastest_message
-    (messages.last)? messages.last.body : 'まだメッセージはありません'
+    messages.last.try(:body) || 'まだメッセージはありません'
   end
 
 end
