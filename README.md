@@ -1,4 +1,20 @@
-# chatspaceデータベース設計
+# サービス内容
+ユーザーが任意のチャットグループを作成し、そこに他の登録ユーザーを自由に追加・削除できる。
+チャット画面では、テキストと画像を投稿できる。
+
+# 主な機能
+
+### チャット画面でのテキスト・画像の投稿を非同期で実装
+https://github.com/tokuchan-pg/chat-space/pull/22
+https://github.com/tokuchan-pg/chat-space/pull/24
+
+### グループ作成時のメンバー選択においてインクリメンタルサーチを実装
+https://github.com/tokuchan-pg/chat-space/pull/23
+
+### チャット画面に自動更新機能を実装
+https://github.com/tokuchan-pg/chat-space/pull/26
+
+# データベース設計
 
 ### テーブルの構成
 
