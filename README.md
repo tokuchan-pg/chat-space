@@ -5,7 +5,7 @@
 # 主な機能
 
 ### チャット画面でのテキスト・画像の投稿を非同期で実装
-https://github.com/tokuchan-pg/chat-space/pull/22
+https://github.com/tokuchan-pg/chat-space/pull/22  
 https://github.com/tokuchan-pg/chat-space/pull/24
 
 ### グループ作成時のメンバー選択においてインクリメンタルサーチを実装
